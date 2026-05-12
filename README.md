@@ -19,7 +19,7 @@ Instead, I spend half my energy chasing, and the other half rushing."*
 
 ---
 
-## Action — What I Did
+## Action - What I Did
 
 Designed and built a scheduled Power Automate cloud flow that runs every 
 morning at 8am, reads a SharePoint client tracker, calculates days 
@@ -28,18 +28,18 @@ a personalised reminder email in the right tone for each client.
 
 The system has 6 components:
 
-- **SharePoint ClientFilingTracker** — single source of truth storing 
+- **SharePoint ClientFilingTracker** - single source of truth storing 
   client name, email, filing type, deadline, documents expected, 
   documents received, status, and reminder stage
-- **Scheduled daily flow** — processes only incomplete filings, 
+- **Scheduled daily flow** - processes only incomplete filings, 
   ignoring finished ones to avoid wasted AI credits
-- **Tiered escalation logic** — three nested conditions route each 
+- **Tiered escalation logic** - three nested conditions route each 
   client into exactly one tier based on days to deadline
-- **AI Builder prompts** — generates a fresh personalised email per 
+- **AI Builder prompts** - generates a fresh personalised email per 
   client in the correct tone for their tier
-- **Human approval gate** — urgent messages (7 days or fewer) pause 
+- **Human approval gate** - urgent messages (7 days or fewer) pause 
   for owner review before sending; lower-risk tiers send automatically
-- **Audit trail** — every email sent and every approval decision is 
+- **Audit trail** - every email sent and every approval decision is 
   timestamped back to the SharePoint row
 
 ### Escalation Tiers
@@ -48,24 +48,24 @@ The system has 6 components:
 |---|---|---|
 | 30 days | Friendly heads-up | No |
 | 14 days | Firm but courteous | No |
-| 7 days or fewer | Urgent | Yes — human review |
+| 7 days or fewer | Urgent | Yes - human review |
 | More than 30 days | No action | — |
 
 ---
 
 ## Skills Used
 
-- **Microsoft Power Automate** — scheduled cloud flow, nested conditions, 
+- **Microsoft Power Automate** - scheduled cloud flow, nested conditions, 
   Apply to each loop, Compose actions, dynamic expressions
-- **AI Builder** — GPT-4.1 prompt actions with structured input variables, 
+- **AI Builder** - GPT-4.1 prompt actions with structured input variables, 
   tone control, output format constraints, and anti-hallucination guards
-- **SharePoint** — list design, dynamic content wiring, status updates, 
+- **SharePoint** - list design, dynamic content wiring, status updates, 
   audit trail
-- **Microsoft Approvals connector** — human-in-the-loop governance for 
+- **Microsoft Approvals connector** - human-in-the-loop governance for 
   high-risk messages
-- **Prompt Engineering** — three-tier prompt design with consistent 
+- **Prompt Engineering** - three-tier prompt design with consistent 
   structure, explicit tone instructions, and length constraints
-- **Responsible AI** — tiered governance model, data residency 
+- **Responsible AI** - tiered governance model, data residency 
   compliance, UK GDPR and ISO 42001 alignment
 
 ---
@@ -74,11 +74,13 @@ The system has 6 components:
 
 Based on the owner's baseline estimate of 6 hours per week spent 
 chasing clients, the system was projected to reduce active chasing 
-time to approximately 1 hour per week — recovering around 250 hours 
+time to approximately 1 hour per week, recovering around 250 hours 
 of staff capacity per year.
 
-Against an estimated ongoing system cost of £50–75 per month, the 
-projected return on recovered capacity alone is 7–10x.
+The system costs an estimated £50-75 per month to run. Based on a 
+conservative staff cost of £25-35 per hour, the 250 hours of recovered 
+capacity per year is worth approximately £6,250-£8,750 meaning the 
+system pays for itself roughly 7 to 10 times over each year.
 
 Additional projected benefits:
 - Earlier document arrival giving more time for proper filing review
@@ -93,7 +95,7 @@ Additional projected benefits:
 
 ### The full Power Automate flow
 ![Full flow](./visuals/01-power-automate-full-flow.png)
-*End-to-end scheduled flow — Recurrence trigger through tiered 
+*End-to-end scheduled flow; Recurrence trigger through tiered 
 escalation conditions to email send and SharePoint update*
 
 ---
@@ -101,14 +103,14 @@ escalation conditions to email send and SharePoint update*
 ### Human approval gate for urgent messages
 ![Approval card](./visuals/09-approval-card.png)
 *Owner receives an approval card showing the AI draft before any 
-urgent email is sent — responsible AI built into the architecture, 
+urgent email is sent; responsible AI built into the architecture, 
 not added as an afterthought*
 
 ---
 
 ### Four AI-drafted emails with different tones, sent in one run
 ![Inbox tones](./visuals/11-inbox-email-tones.png)
-*Same flow, same morning — four clients, four personalised emails, 
+*Same flow, same morning; four clients, four personalised emails, 
 four different tones based on deadline distance*
 
 ---
